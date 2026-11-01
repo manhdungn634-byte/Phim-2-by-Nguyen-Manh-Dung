@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web Phim 2 by Nguyen Manh Dung</title>
+<style>
+:root{--bg:#0b0b10;--card:#16161d;--tx:#f4f4f8;--mut:#9a9aa8;--ac:#f7c948;--bd:#2a2a35}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f5f5f8;--card:#fff;--tx:#16161d;--mut:#6b6b78;--ac:#d98e00;--bd:#e0e0e8}}
+:root[data-theme="light"]{--bg:#f5f5f8;--card:#fff;--tx:#16161d;--mut:#6b6b78;--ac:#d98e00;--bd:#e0e0e8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:96px;max-width:900px;margin:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;padding:12px 14px}
+.logo{font-weight:800;font-size:19px;margin-right:auto}.logo b{color:var(--ac)}.logo small{display:block;font-size:10px;font-weight:500;color:var(--mut)}
+.ic{width:38px;height:38px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:16px}
+.ic.api{width:auto;padding:0 12px;font-size:13px;font-weight:700;border-radius:19px}
+.pills{display:flex;gap:8px;overflow-x:auto;padding:4px 14px 12px;scrollbar-width:none}
+.pill{white-space:nowrap;border:1.5px solid var(--bd);border-radius:22px;padding:8px 16px;font-weight:600}
+.pill.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.hero{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 18%;scrollbar-width:none}
+.sl{flex:0 0 64%;scroll-snap-align:center;text-align:center;cursor:pointer}
+.sl .po{aspect-ratio:2/3;border-radius:18px;border:2px solid #7a5c2a;overflow:hidden;position:relative;background:var(--card)}
+.sl h2{margin:12px 0 2px;font-size:21px}.sl p{margin:0 0 10px;color:var(--mut)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.tags span{border:1.5px solid var(--tx);border-radius:10px;padding:4px 9px;font-size:12px;font-weight:700}
+.tags span.im{border-color:var(--ac);color:var(--ac)}
+.po img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.int{display:flex;gap:12px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.int button{flex:0 0 150px;height:90px;border-radius:14px;padding:14px;font-weight:800;font-size:18px;color:#fff;text-align:left}
+.sec{margin-top:26px}
+.sec h3{margin:0 14px 12px;font-size:22px}
+.row{display:flex;gap:12px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.cd{flex:0 0 140px;cursor:pointer;min-width:0}.cd.w{flex-basis:210px}
+.cd .po{aspect-ratio:2/3;border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px;color:#fff;font-weight:800;font-size:13px}
+.cd.w .po{aspect-ratio:16/10}
+.cd b{display:block;margin-top:7px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cd small{display:block;color:var(--mut);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd{position:absolute;left:8px;border-radius:9px;padding:2px 8px;font-size:11px;font-weight:700;color:#fff}
+.bd.a{top:8px;background:#2f7bff}.bd.b{bottom:8px;background:#1fa35a}
+.rk{position:absolute;right:6px;bottom:0;font-size:46px;font-weight:900;color:#fff;text-shadow:0 2px 8px #000a}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;padding:0 14px}
+.grid .cd{flex:none}
+.view{display:none}.view.on{display:block}
+.sb{margin:6px 14px 14px;display:block;width:calc(100% - 28px);padding:13px;border-radius:14px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit}
+.nav{position:fixed;left:50%;transform:translateX(-50%);width:calc(100% - 20px);max-width:880px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:8;display:flex;gap:8px;padding:8px;border-radius:26px;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--bd)}
+.nav button{flex:1;padding:8px 0;border-radius:20px;font-size:11px;color:var(--mut);display:flex;flex-direction:column;gap:2px;align-items:center}
+.nav button span{font-size:19px}.nav button.on{color:var(--ac);background:var(--bd)}
+.acc{padding:0 14px}.acc .two{display:flex;gap:10px;margin:12px 0}
+.acc .two button{flex:1;padding:14px;border-radius:14px;font-weight:700;background:var(--tx);color:var(--bg)}
+.acc .two .g{background:linear-gradient(135deg,#ffe29a,#e8b04a);color:#222}
+.menu{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden}
+.menu button{width:100%;text-align:left;padding:17px 16px;display:flex;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.menu button:last-child{border:0}
+.day{margin:0 14px 10px;background:var(--card);border-radius:14px;padding:14px;border:1px solid var(--bd);cursor:pointer}
+.day b{color:var(--ac)}
+.m{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;justify-content:center;z-index:20}
+.m.on{display:flex}
+.box{background:var(--card);border-radius:20px 20px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));width:100%;max-width:560px;max-height:90vh;overflow:auto}
+.box h3{margin-top:0}
+.box input{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}
+.bk{width:100%;border-radius:12px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border:1.5px solid var(--bd);border-radius:20px;padding:8px 14px}
+.go{display:block;width:100%;margin-top:8px;padding:13px;border-radius:12px;background:var(--ac);color:#111;font-weight:800}
+.go.s{background:var(--bd);color:var(--tx)}
+.ob{margin:20px 14px;padding:20px;border-radius:16px;background:var(--card);border:1px solid var(--bd)}
+.st{font-size:13px;color:var(--mut);min-height:20px}
+footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 14px 0}
+</style>
+</head>
+<body>
+<div class="top">
+ <div class="logo">🎬 Web<b>Phim</b>2<small>by Nguyen Manh Dung</small></div>
+ <button class="ic api" id="bapi">API</button>
+ <button class="ic" id="bbell" aria-label="Yêu thích">🔔</button>
+ <button class="ic" id="bav" aria-label="Tài khoản" style="background:var(--ac);color:#111;font-weight:800">👤</button>
+</div>
+
+<div class="view on" id="v-home"><div class="pills" id="pills"></div><div id="home"></div></div>
+<div class="view" id="v-search"><input class="sb" id="q" placeholder="🔍 Tìm tên phim..."><div class="grid" id="sg"></div></div>
+<div class="view" id="v-cal"><h3 style="margin:10px 14px">Phim sắp chiếu</h3><div id="cal"></div></div>
+<div class="view" id="v-acc"><div class="acc">
+ <h2>👤 Tài khoản</h2>
+ <div id="guest" class="two"><button class="g" id="bl">Đăng nhập</button><button id="br">Đăng ký</button></div>
+ <p id="hello" style="display:none;font-weight:700"></p>
+ <div class="menu">
+  <button id="mfav">❤️ Yêu thích <span>›</span></button>
+  <button id="mapi">🔑 Cài đặt API key <span>›</span></button>
+  <button id="mth">🌗 Đổi giao diện sáng/tối <span>›</span></button>
+ </div>
+ <button id="bo" style="display:none;margin-top:12px;color:var(--mut)">Đăng xuất</button>
+</div></div>
+<footer>© Web Phim 2 by Nguyen Manh Dung<br>Dữ liệu phim từ TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>
+
+<div class="nav" id="nav">
+ <button data-v="home" class="on"><span>🏠</span>Trang chủ</button>
+ <button data-v="search"><span>🔍</span>Tìm kiếm</button>
+ <button data-v="cal"><span>📅</span>Lịch chiếu</button>
+ <button data-v="acc"><span>👤</span>Tài khoản</button>
+</div>
+
+<div class="m" id="mg"><div class="box"><h3>Thể loại</h3><div class="chips" id="gc"></div></div></div>
+<div class="m" id="ml"><div class="box"><h3 id="mt">Đăng nhập</h3>
+ <input id="un" placeholder="Tên hiển thị"><input type="password" placeholder="Mật khẩu">
+ <p class="st">Đây là đăng nhập mẫu, chỉ lưu tên trên máy bạn.</p>
+ <button class="go" id="go">Tiếp tục</button></div></div>
+<div class="m" id="ma"><div class="box"><h3>API key TMDB</h3>
+ <p class="st">Lấy key miễn phí tại themoviedb.org → Settings → API. Dán key v3 (chuỗi 32 ký tự) vào đây.</p>
+ <input id="ak" placeholder="Dán API key..." autocomplete="off">
+ <p class="st" id="as"></p>
+ <button class="go" id="sk">Lưu và tải phim</button></div></div>
+<div class="m" id="mf"><div class="box"><h3>❤️ Yêu thích</h3><div class="grid" id="fg" style="padding:0"></div></div></div>
+<div class="m" id="md"><div class="box" id="dt"></div></div>
+
+<script>
+// Dán API key TMDB vào đây (hoặc nhập ở nút API trên trang):
+var API_KEY = "";
+
+var $=function(i){return document.getElementById(i)};
+var IMG="https://image.tmdb.org/t/p/",reg={},tab="rec",cur=null,page=1;
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}return null}
+function key(){return API_KEY||ls("w2k")||""}
+function api(path,p){var k=key();if(!k)return Promise.reject(new Error("nokey"));
+ return fetch("https://api.themoviedb.org/3"+path+"?api_key="+encodeURIComponent(k)+"&language=vi-VN"+(p?"&"+p:"")).then(function(r){if(!r.ok)throw new Error("http"+r.status);return r.json()})}
+function norm(x,def){return{id:x.id,type:x.media_type||def||(x.first_air_date?"tv":"movie"),title:x.title||x.name||"",orig:x.original_title||x.original_name||"",p:x.poster_path,b:x.backdrop_path,y:(x.release_date||x.first_air_date||"").slice(0,4),d:x.release_date||x.first_air_date||"",v:x.vote_average?x.vote_average.toFixed(1):"–"}}
+function list(d,def){return(d.results||[]).map(function(x){return norm(x,def)}).filter(function(m){return(m.type=="tv"||m.type=="movie")&&m.p})}
+function card(m,wide,rank){reg[m.type+m.id]=m;
+ var src=wide&&m.b?IMG+"w500"+m.b:(m.p?IMG+"w342"+m.p:""),h=(m.id*37)%360;
+ return '<div class="cd'+(wide?' w':'')+'" data-k="'+m.type+m.id+'"><div class="po" style="background:linear-gradient(160deg,hsl('+h+',60%,40%),hsl('+((h+50)%360)+',55%,18%))">'+(src?'<img loading="lazy" src="'+src+'" alt="">':esc(m.title))+'<span class="bd a">'+(m.type=="tv"?"Phim bộ":"Phim lẻ")+'</span><span class="bd b">★ '+m.v+'</span>'+(rank?'<span class="rk">'+rank+'</span>':'')+'</div><b>'+esc(m.title)+'</b><small>'+esc(m.y)+(m.orig&&m.orig!==m.title?' · '+esc(m.orig):'')+'</small></div>'}
+
+var TABS=[["rec","Đề xuất"],["tv","Phim bộ"],["movie","Phim lẻ"],["anim","Hoạt hình"],["gen","Thể loại ▾"]];
+var LISTS={tv:["Phim bộ","/discover/tv","sort_by=popularity.desc"],movie:["Phim lẻ","/discover/movie","sort_by=popularity.desc"],anim:["Hoạt hình","/discover/movie","with_genres=16&sort_by=popularity.desc"]};
+var G=[["Hành động",28],["Phiêu lưu",12],["Hoạt hình",16],["Hài",35],["Hình sự",80],["Chính kịch",18],["Gia đình",10751],["Giả tưởng",14],["Lịch sử",36],["Kinh dị",27],["Bí ẩn",9648],["Lãng mạn",10749],["Viễn tưởng",878],["Chiến tranh",10752]];
+var ROWS=[["Đang thịnh hành","/trending/all/week","",true],["Phim bộ phổ biến","/tv/popular","",false],["Phim Hàn Quốc","/discover/tv","with_original_language=ko&sort_by=popularity.desc",true],["Phim Trung Quốc","/discover/tv","with_original_language=zh&sort_by=popularity.desc",true],["Phim US-UK","/discover/tv","with_original_language=en&sort_by=popularity.desc",true],["Điện ảnh đang chiếu","/movie/now_playing","",false],["Hoạt hình","/discover/movie","with_genres=16&sort_by=popularity.desc",false],["Top 10 phim bộ","/tv/top_rated","",false,true]];
+var HOT=[["Top đánh giá","#e8b02a,#e06a50",["Top đánh giá","/movie/top_rated",""]],["Phim Hàn","#4fb8a8,#b0707a",["Phim Hàn Quốc","/discover/tv","with_original_language=ko&sort_by=popularity.desc"]],["Sắp chiếu","#7a74c0,#d0606a",["Sắp chiếu","/movie/upcoming",""]],["Hoạt hình","#4a9be0,#6fd0a0",LISTS.anim]];
+
+function pills(){
+ $("pills").innerHTML=TABS.map(function(t){return '<button class="pill'+(tab==t[0]?' on':'')+'" data-t="'+t[0]+'">'+t[1]+'</button>'}).join("");
+ Array.prototype.forEach.call($("pills").children,function(b){b.onclick=function(){if(b.dataset.t=="gen"){$("mg").classList.add("on")}else{tab=b.dataset.t;home()}}});
+}
+function fail(e){
+ if(e.message=="nokey"){$("home").innerHTML='<div class="ob"><h3>👋 Chào mừng bạn!</h3><p>Trang cần API key TMDB (miễn phí) để hiện phim.</p><button class="go" id="ob">Nhập API key</button></div>';$("ob").onclick=openApi}
+ else $("home").innerHTML='<div class="ob"><h3>Không tải được phim</h3><p>'+esc(e.message)+'. Kiểm tra API key và kết nối mạng, rồi thử lại.</p><button class="go" id="ob">Kiểm tra API key</button></div>',$("ob").onclick=openApi;
+}
+function hero(l){$("hero").innerHTML='<div class="hero">'+l.map(function(m){reg[m.type+m.id]=m;return '<div class="sl" data-k="'+m.type+m.id+'"><div class="po"><img src="'+IMG+'w500'+m.p+'" alt=""></div><h2>'+esc(m.title)+'</h2><p>'+esc(m.orig)+'</p><div class="tags"><span class="im">TMDB '+m.v+'</span><span>'+m.y+'</span><span>'+(m.type=="tv"?"Phim bộ":"Phim lẻ")+'</span></div></div>'}).join("")+'</div>'}
+function home(){
+ pills();
+ if(!key()){fail(new Error("nokey"));return}
+ if(tab!="rec"){showList(tab=="gen"?cur:LISTS[tab]);return}
+ var h='<div id="hero"></div><div class="sec"><h3>Bạn đang quan tâm gì?</h3><div class="int">'+HOT.map(function(x,i){return '<button data-h="'+i+'" style="background:linear-gradient(160deg,'+x[1]+')">'+x[0]+'</button>'}).join("")+'</div></div>';
+ ROWS.forEach(function(r,i){h+='<div class="sec" id="r'+i+'"></div>'});
+ $("home").innerHTML=h;
+ ROWS.forEach(function(r,i){api(r[1],r[2]).then(function(d){
+  var l=list(d);if(i==0)hero(l.slice(0,6));
+  l=l.slice(0,r[4]?10:16);
+  $("r"+i).innerHTML='<h3>'+r[0]+'</h3><div class="row">'+l.map(function(m,j){return card(m,r[3],r[4]?j+1:0)}).join("")+'</div>'}).catch(fail)});
+}
+function showList(c){cur=c;page=1;
+ $("home").innerHTML='<h3 style="margin:6px 14px 12px">'+esc(c[0])+'</h3><div class="grid" id="lg"></div><button class="go" id="more" style="width:calc(100% - 28px);margin:16px 14px">Xem thêm</button>';
+ $("more").onclick=more;more()}
+function more(){api(cur[1],(cur[2]?cur[2]+"&":"")+"page="+page).then(function(d){
+ $("lg").insertAdjacentHTML("beforeend",list(d,cur[1].indexOf("tv")>-1?"tv":"movie").map(function(m){return card(m)}).join(""));page++}).catch(fail)}
+$("gc").innerHTML=G.map(function(g){return '<button data-g="'+g[1]+'">'+g[0]+'</button>'}).join("");
+Array.prototype.forEach.call($("gc").children,function(b){b.onclick=function(){tab="gen";cur=[b.textContent,"/discover/movie","with_genres="+b.dataset.g+"&sort_by=popularity.desc"];$("mg").classList.remove("on");home()}});
+
+var tm;$("q").oninput=function(e){clearTimeout(tm);var v=e.target.value.trim();tm=setTimeout(function(){
+ if(!v){$("sg").innerHTML="";return}
+ api("/search/multi","query="+encodeURIComponent(v)).then(function(d){var l=list(d);$("sg").innerHTML=l.length?l.map(function(m){return card(m)}).join(""):'<p style="color:var(--mut);padding:0 14px">Không tìm thấy phim.</p>'}).catch(function(){$("sg").innerHTML='<p style="color:var(--mut);padding:0 14px">Cần API key hợp lệ để tìm kiếm.</p>'})},400)};
+function cal(){api("/movie/upcoming").then(function(d){var l=list(d).sort(function(a,b){return a.d<b.d?-1:1});
+ $("cal").innerHTML=l.map(function(m){reg[m.type+m.id]=m;return '<div class="day" data-k="'+m.type+m.id+'"><b>'+m.d.split("-").reverse().join("/")+'</b><br>'+esc(m.title)+'</div>'}).join("")}).catch(function(){$("cal").innerHTML='<p style="padding:0 14px;color:var(--mut)">Cần API key để xem lịch chiếu.</p>'})}
+
+function favs(){try{return JSON.parse(ls("w2f")||"{}")}catch(e){return{}}}
+function toggleFav(k){var f=favs();if(f[k])delete f[k];else f[k]=reg[k];ls("w2f",JSON.stringify(f))}
+function openDetail(k){var m=reg[k]||favs()[k];if(!m)return;reg[k]=m;
+ $("dt").innerHTML='<p>Đang tải...</p>';$("md").classList.add("on");
+ api("/"+m.type+"/"+m.id,"append_to_response=videos&include_video_language=vi,en,null").then(function(d){
+  var v=((d.videos||{}).results||[]).filter(function(x){return x.site=="YouTube"}),t=v.filter(function(x){return x.type=="Trailer"})[0]||v[0];
+  var gs=(d.genres||[]).map(function(g){return g.name}).join(", "),fv=!!favs()[k];
+  $("dt").innerHTML=(d.backdrop_path?'<img class="bk" src="'+IMG+'w780'+d.backdrop_path+'" alt="">':'')+'<h3>'+esc(m.title)+'</h3><div class="tags" style="justify-content:flex-start"><span class="im">TMDB '+m.v+'</span><span>'+m.y+'</span>'+(d.runtime?'<span>'+d.runtime+' phút</span>':'')+(d.number_of_seasons?'<span>'+d.number_of_seasons+' mùa</span>':'')+'</div><p class="st">'+esc(gs)+'</p><p>'+esc(d.overview||"Chưa có mô tả tiếng Việt.")+'</p><div id="tr"></div><button class="go" id="bt">▶ Xem trailer</button><button class="go s" id="bf">'+(fv?"💔 Bỏ yêu thích":"❤️ Yêu thích")+'</button>';
+  $("bt").onclick=function(){$("tr").innerHTML=t?'<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(t.key)+'?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin-top:8px"></iframe>':'<p class="st">Chưa có trailer cho phim này.</p>'};
+  $("bf").onclick=function(){toggleFav(k);openDetail(k)};
+ }).catch(function(){$("dt").innerHTML='<p>Không tải được chi tiết phim. Kiểm tra API key.</p>'})}
+document.addEventListener("click",function(e){
+ var h=e.target.closest("[data-h]");if(h){tab="gen";cur=HOT[h.dataset.h][2];home();return}
+ var el=e.target.closest("[data-k]");if(el)openDetail(el.dataset.k)});
+function openFavs(){var f=favs(),l=Object.keys(f).map(function(k){return f[k]});
+ $("fg").innerHTML=l.length?l.map(function(m){return card(m)}).join(""):'<p class="st">Chưa có phim yêu thích.</p>';$("mf").classList.add("on")}
+function openApi(){$("ak").value=ls("w2k")||"";$("as").textContent=key()?"Đã có key.":"Chưa có key.";$("ma").classList.add("on")}
+$("sk").onclick=function(){var k=$("ak").value.trim();if(!k)return;$("as").textContent="Đang kiểm tra...";
+ fetch("https://api.themoviedb.org/3/configuration?api_key="+encodeURIComponent(k)).then(function(r){
+  if(!r.ok){$("as").textContent="Key không hợp lệ. Hãy kiểm tra lại.";return}
+  ls("w2k",k);$("ma").classList.remove("on");home();cal()}).catch(function(){$("as").textContent="Không kết nối được TMDB."})};
+$("bapi").onclick=openApi;$("mapi").onclick=openApi;$("mfav").onclick=openFavs;$("bbell").onclick=openFavs;
+$("mth").onclick=function(){var d=document.documentElement,dark=getComputedStyle(document.body).backgroundColor=="rgb(11, 11, 16)";d.setAttribute("data-theme",dark?"light":"dark")};
+
+function view(v){["home","search","cal","acc"].forEach(function(x){$("v-"+x).classList.toggle("on",x==v)});
+ Array.prototype.forEach.call($("nav").children,function(b){b.classList.toggle("on",b.dataset.v==v)});window.scrollTo(0,0)}
+Array.prototype.forEach.call($("nav").children,function(b){b.onclick=function(){view(b.dataset.v)}});
+function user(n){$("guest").style.display=n?"none":"flex";$("hello").style.display=n?"block":"none";$("bo").style.display=n?"block":"none";
+ $("bav").textContent=n?n.charAt(0).toUpperCase():"👤";if(n)$("hello").textContent="Xin chào, "+n+"!"}
+function auth(t){$("mt").textContent=t;$("ml").classList.add("on")}
+$("bl").onclick=function(){auth("Đăng nhập")};$("br").onclick=function(){auth("Đăng ký")};$("bav").onclick=function(){view("acc")};
+$("go").onclick=function(){var n=$("un").value.trim();if(!n)return;ls("w2u",n);user(n);$("ml").classList.remove("on")};
+$("bo").onclick=function(){ls("w2u",null);user(null)};
+Array.prototype.forEach.call(document.querySelectorAll(".m"),function(m){m.onclick=function(e){if(e.target===m){m.classList.remove("on");if(m.id=="md")$("dt").innerHTML=""}}});
+user(ls("w2u"));home();cal();
+</script>
+</body>
+</html>
